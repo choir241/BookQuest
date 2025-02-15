@@ -4,3 +4,7 @@
     background: #843B55;
     color: #F1E4EE;
 }
+
+.button-hover:hover{
+    background: #642E3B;
+}
