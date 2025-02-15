@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+.book-hover:hover{
+    background: #843B55;
+    color: #F1E4EE;
+}
