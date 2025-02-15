@@ -2,13 +2,14 @@ import BookCard, { Book } from "../components/BookCard";
 import { books } from "../static/books";
 import Button from "../components/Button";
 import { useState } from "react";
+import Footer from "../components/Footer";
 
 export default function Home() {
   const [numOfItems, setNumOfItems] = useState<number>(5);
 
   return (
-    <main>
-      <h1>Home</h1>
+    <main className="p-2">
+      <h1 className="text-5xl">Library</h1>
       <section className="flex items-center flex-col">
         {books
           .map((book: Book) => {
@@ -27,6 +28,8 @@ export default function Home() {
           />
         )}
       </section>
+
+      <Footer/>
     </main>
   );
 }
