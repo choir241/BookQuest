@@ -1,12 +1,14 @@
-import './App.css'
+import { BrowserRouter } from "react-router-dom";
+import { Route, Routes } from "react-router";
+import "./App.css";
+import Home from "./routes/Home";
 
-function App() {
-
-  return (
-   <main>
-      <h1>Book Quest</h1>
-   </main>
+export default function App(){
+  return(
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />}/>
+      </Routes>
+    </BrowserRouter>
   )
 }
-
-export default App
