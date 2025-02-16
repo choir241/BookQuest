@@ -1,6 +1,6 @@
 interface IButton {
   onClick: () => void;
-  text: string;
+  text: string | React.JSX.Element;
 }
 
 export default function Button({ button }: { button: IButton }) {
