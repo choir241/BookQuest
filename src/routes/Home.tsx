@@ -7,7 +7,7 @@ import Header from "../components/Header";
 
 export default function Home() {
   const [numOfItems, setNumOfItems] = useState<number>(5);
-
+  
   return (
     <main className="p-2">
       <Header/>

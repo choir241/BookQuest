@@ -5,6 +5,18 @@
     color: #F1E4EE;
 }
 
-.button-hover:hover{
+button:hover{
     background: #642E3B;
+}
+
+a{
+    border-bottom: 1px solid black;
+}
+
+a:hover{
+    color: #F1E4EE;
+    padding-bottom: .2rem;
+    transition:
+        padding-bottom .2s ease-in,
+        color .2s ease-in;
 }

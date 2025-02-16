@@ -13,10 +13,11 @@ export default function Login() {
   return (
     <main className="p-2">
       <Header />
-      <h1 className="text-5xl">Login</h1>
-      <form>
-        <section>
-          <Label label={{ text: "Your name", htmlFor: "name" }} />
+      <h1 className="mb-6 text-5xl">Login</h1>
+      <section className="w-full justify-center flex">
+        <form className="w-80 py-10 flex flex-col items-center bg-[#F1B6CA] shadow-[10px_10px_10px_#C9ABC5] rounded-[10px]">
+        <section className="mb-4 flex flex-col items-start">
+          <Label label={{ className:"mb-2", text: "Your name", htmlFor: "name" }} />
           <Input
             input={{
               type: "text",
@@ -28,8 +29,8 @@ export default function Login() {
           />
         </section>
 
-        <section>
-          <Label label={{ text: "Your email", htmlFor: "email" }} />
+        <section className="mb-4 flex flex-col items-start">
+          <Label label={{ className: "mb-2", text: "Your email", htmlFor: "email" }} />
           <Input
             input={{
               type: "email",
@@ -41,8 +42,8 @@ export default function Login() {
           />
         </section>
 
-        <section>
-          <Label label={{ text: "Your Password", htmlFor: "password" }} />
+        <section className="mb-8 flex flex-col items-start">
+          <Label label={{ className: "mb-2", text: "Your Password", htmlFor: "password" }} />
           <Input
             input={{
               type: "password",
@@ -53,7 +54,11 @@ export default function Login() {
             }}
           />
         </section>
-      </form>
+
+        <Button button={{text: "Login", onClick: ()=>""}}/>
+        <p className="mt-2">Don't have an account? <a href = "/signup">Sign up here!</a></p>
+        </form>
+      </section>
       <Footer />
     </main>
   );
