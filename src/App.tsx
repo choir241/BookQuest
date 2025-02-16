@@ -7,7 +7,9 @@ import Signup from "./routes/Signup";
 import Book from "./routes/Books";
 import { UserContext } from "../src/middleware/UserContext";
 import { getAccount, IAccount } from "./backend/auth/getAccount";
-import { useState, useEffect, Suspense } from "react";
+import { useState, useMemo, Suspense } from "react";
+import PrivateRoutes from "./middleware/PrivateRoutes";
+import PublicRoutes from "./middleware/PublicRoutes";
 
 export default function App() {
   const [account, setAccount] = useState<IAccount>({
@@ -16,7 +18,7 @@ export default function App() {
     email: "",
   });
 
-  useEffect(() => {
+  useMemo(() => {
     getAccount({ setAccount });
   }, []);
 
@@ -26,9 +28,13 @@ export default function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/books" element={<Book />} />
+            <Route element={<PublicRoutes />}>
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+            </Route>
+            <Route element={<PrivateRoutes />}>
+              <Route path="/books" element={<Book />} />
+            </Route>
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>
