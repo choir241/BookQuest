@@ -20,3 +20,9 @@ a:hover{
         padding-bottom .2s ease-in,
         color .2s ease-in;
 }
+
+.home-btn-hvr:hover{
+    background: #642E3B;
+    transition: none;
+    padding-bottom: 1rem;
+}
