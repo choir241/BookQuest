@@ -13,7 +13,7 @@ export default function Header() {
   return (
     <header className="relative flex justify-end items-center mb-6">
       
-      {account.$id ? (
+      {account.$id || sessionStorage.getItem("id") ? (
                 <a className="text-xl plus-btn mr-6" href="/addBook">
                   <FaPlus/>
                 </a>
@@ -45,7 +45,7 @@ export default function Header() {
                 Home
               </a>
             </li>
-            {account.$id ? (
+            {account.$id || sessionStorage.getItem("id") ? (
               ""
             ) : (
               <li className="mb-4">
@@ -54,7 +54,7 @@ export default function Header() {
                 </a>
               </li>
             )}
-            {account.$id ? (
+            {account.$id || sessionStorage.getItem("id") ? (
               ""
             ) : (
               <li className="mb-4">
@@ -63,8 +63,8 @@ export default function Header() {
                 </a>
               </li>
             )}
-            {account.$id ? (
-              <li>
+            {account.$id || sessionStorage.getItem("id") ? (
+              <li className="mb-8">
                 <a className="text-xl" href="/books">
                   Books
                 </a>
@@ -73,7 +73,7 @@ export default function Header() {
               ""
             )}
 
-            {account.$id ? (
+            {account.$id || sessionStorage.getItem("id") ? (
               <li>
                 <Button button={{ onClick: () => logout(), text: "Logout" }} />
               </li>

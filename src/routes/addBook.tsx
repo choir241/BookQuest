@@ -1,5 +1,5 @@
 import Button from "../components/Button";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Input from "../components/Input";
@@ -13,11 +13,6 @@ export default function AddBook() {
   const [altText, setAltText] = useState<string>("");
   const [genres, setGenres] = useState<string[]>([]);
   const [image, setImage] = useState<File | string>();
-
-  useEffect(() => {
-    console.log(image);
-    console.log(genres);
-  }, [image, genres]);
 
   return (
     <main className="p-2">
@@ -102,7 +97,7 @@ export default function AddBook() {
             <Label
               label={{
                 className: "mb-2",
-                text: "Select genre(s)",
+                text: "Select genre(s) (To grab multiple values, use cmd/ctr + click on genres)",
                 htmlFor: "genre",
               }}
             />
@@ -111,11 +106,16 @@ export default function AddBook() {
               select={{
                 multiple: true,
                 options: genreOptions,
-                onChange: (e) => e,
+                onChange: (e) => setGenres(e),
                 id: "genre",
               }}
             />
           </section>
+
+          <Button
+            button={{text:"Add book", onClick:()=>""
+            }}
+          />
         </form>
       </section>
 
