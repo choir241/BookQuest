@@ -35,6 +35,8 @@ export async function addBook({
         userId: userId,
       }
     );
+
+    window.location.reload();
   } catch (err) {
     console.error(err);
   }
