@@ -1,18 +1,50 @@
 import Button from "../components/Button";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Input from "../components/Input";
 import Label from "../components/Label";
 import Select from "../components/Select";
 import { genreOptions } from "../static/genres";
+import { addBook } from "../backend/database/addBook";
+import { Book } from "../components/BookCard";
+import { UserContext } from "../middleware/UserContext";
+interface IBook extends Book {
+  file: File;
+}
+
+interface ISubmit {
+  book: IBook;
+  userId: string;
+}
+
+async function submitData({ submit }: { submit: ISubmit }) {
+  addBook({
+    file: submit.book.file,
+    userId: submit.userId,
+    bookData: {
+      image: submit.book.image,
+      imageAlt: submit.book.imageAlt,
+      genres: submit.book.genres,
+      author: submit.book.author,
+      name: submit.book.name,
+    },
+  });
+}
 
 export default function AddBook() {
   const [name, setName] = useState<string>("");
   const [author, setAuthor] = useState<string>("");
   const [altText, setAltText] = useState<string>("");
   const [genres, setGenres] = useState<string[]>([]);
-  const [image, setImage] = useState<File | string>();
+  const [image, setImage] = useState<File>();
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const { account } = useContext(UserContext);
+
+  useEffect(() => {
+    console.log(image);
+  }, [image, loading]);
 
   return (
     <main className="p-2">
@@ -20,7 +52,7 @@ export default function AddBook() {
       <h1 className="mb-6 text-5xl">Add Book</h1>
 
       <section className="w-full justify-center flex">
-        <form className="w-90 py-10 flex flex-col items-center bg-[#F1B6CA] shadow-[10px_10px_10px_#C9ABC5] rounded-[10px]">
+        <form className="w-90 py-10 flex flex-col items-center justify-center bg-[#F1B6CA] shadow-[10px_10px_10px_#C9ABC5] rounded-[10px]">
           <section className="mb-4 flex flex-col items-start">
             <Label
               label={{ className: "mb-2", text: "Book name", htmlFor: "name" }}
@@ -87,21 +119,26 @@ export default function AddBook() {
               type="file"
               id="image"
               name="image"
-              onChange={(e) =>
-                setImage(e.target.files ? e.target.files[0] : "")
-              }
+              onChange={(e) => {
+                setLoading(true);
+                if (e.target.files) {
+                  setImage(e.target.files[0]);
+                  setLoading(false);
+                }
+              }}
             />
           </section>
 
-          <section className="mb-4 flex flex-col items-start">
+          <section className="mb-4 flex flex-col items-center justify-center">
             <Label
               label={{
                 className: "mb-2",
-                text: "Select genre(s) (To grab multiple values, use cmd/ctr + click on genres)",
+                text: "Select genre(s)",
                 htmlFor: "genre",
               }}
             />
 
+            {/* (To grab multiple values, use cmd/ctr + click on genres) */}
             <Select
               select={{
                 multiple: true,
@@ -113,7 +150,22 @@ export default function AddBook() {
           </section>
 
           <Button
-            button={{text:"Add book", onClick:()=>""
+            button={{
+              text: "Add book",
+              onClick: () =>
+                submitData({
+                  submit: {
+                    userId: account.$id,
+                    book: {
+                      file: image as File,
+                      image: "",
+                      imageAlt: altText,
+                      genres: genres,
+                      author: author,
+                      name: name,
+                    },
+                  },
+                }),
             }}
           />
         </form>

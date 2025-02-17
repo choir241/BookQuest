@@ -1,4 +1,5 @@
 export interface Book {
+  userId?: string;
   image: string;
   imageAlt: string;
   genres: string[];
