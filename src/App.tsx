@@ -5,6 +5,7 @@ import Home from "./routes/Home";
 import Login from "./routes/Login";
 import Signup from "./routes/Signup";
 import Book from "./routes/Books";
+import AddBook from "./routes/addBook";
 import { UserContext } from "../src/middleware/UserContext";
 import { getAccount, IAccount } from "./backend/auth/getAccount";
 import { useState, useMemo, Suspense } from "react";
@@ -34,6 +35,7 @@ export default function App() {
             </Route>
             <Route element={<PrivateRoutes />}>
               <Route path="/books" element={<Book />} />
+              <Route path="/addBook" element={<AddBook />} />
             </Route>
           </Routes>
         </BrowserRouter>
