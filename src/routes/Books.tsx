@@ -1,18 +1,15 @@
 import BookCard, { Book } from "../components/BookCard";
 import { books } from "../static/books";
 import Button from "../components/Button";
-import { useState, useEffect} from "react";
+import { useState, useContext} from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import { listCustomBooks } from "../backend/database/listCustomBooks";
+import { CustomBookContext } from "../middleware/CustomBookContext";
 
 export default function Books() {
   const [numOfItems, setNumOfItems] = useState<number>(5);
-  const [customBooks, setCustomBooks] = useState<Book[]>([]);
 
-  useEffect(()=>{
-    listCustomBooks({ setCustomBooks: (e: Book[]) => setCustomBooks(e) });
-  },[])
+  const {customBooks} = useContext(CustomBookContext);
 
   return (
     <main className="p-2">

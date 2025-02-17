@@ -64,9 +64,19 @@ export default function Header() {
               </li>
             )}
             {account.$id || sessionStorage.getItem("id") ? (
-              <li className="mb-8">
+              <li className="mb-4">
                 <a className="text-xl" href="/books">
                   Books
+                </a>
+              </li>
+            ) : (
+              ""
+            )}
+
+            {account.$id || sessionStorage.getItem("id") ? (
+              <li className="mb-8">
+                <a className="text-xl" href="/profile">
+                  Profile
                 </a>
               </li>
             ) : (
