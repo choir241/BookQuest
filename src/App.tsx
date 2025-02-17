@@ -7,10 +7,11 @@ import Signup from "./routes/Signup";
 import Books from "./routes/Books";
 import Profile from "./routes/Profile";
 import AddBook from "./routes/addBook";
+import ViewBook from  "./routes/View";
 import { UserContext } from "../src/middleware/UserContext";
 import { CustomBookContext } from "../src/middleware/CustomBookContext";
 import { getAccount, IAccount } from "./backend/auth/getAccount";
-import { useState, useMemo, Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
 import PrivateRoutes from "./middleware/PrivateRoutes";
 import PublicRoutes from "./middleware/PublicRoutes";
 import { Book } from "./components/BookCard";
@@ -25,7 +26,7 @@ export default function App() {
 
   const [customBooks, setCustomBooks] = useState<Book[]>([]);
 
-  useMemo(() => {
+  useEffect(() => {
     getAccount({ setAccount });
     listCustomBooks({ setCustomBooks: (e: Book[]) => setCustomBooks(e) });
   }, []);
@@ -42,6 +43,7 @@ export default function App() {
                 <Route path="/signup" element={<Signup />} />
               </Route>
               <Route element={<PrivateRoutes />}>
+                <Route path="/viewBook" element={<ViewBook />} />
                 <Route path="/books" element={<Books />} />
                 <Route path="/addBook" element={<AddBook />} />
                 <Route path="/profile" element={<Profile />} />

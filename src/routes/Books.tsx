@@ -16,8 +16,8 @@ export default function Books() {
       <Header />
       <h1 className="text-5xl">Library</h1>
       <section className="flex items-center flex-col">
-        {[books, customBooks].flatMap((book)=>book).map((book: Book) => {
-            return <BookCard key={book.name} book={book} onClick={() => {}} />;
+        {[books, customBooks].flatMap((book)=>book).map((book: Book, index: number) => {
+            return <BookCard key={book.name} book={book} index={index}/>;
           })
           .slice(0, numOfItems)}
 

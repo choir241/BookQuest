@@ -15,7 +15,7 @@ export default function Home(){
       <img src={icon} alt="open book icon logo vector design template" className="w-40"/>
         <p className="text-xl mb-6">Get your reading journey started!</p>
         {
-        account ?
+        account.$id || sessionStorage.getItem("id") ?
         <a className="text-xl home-btn-hvr cursor-pointer capitalize text-base text-[#F1E4EE] py-4 px-6 bg-[#BC546B] rounded-[10px]" href = "/books">
         Books
       </a>
