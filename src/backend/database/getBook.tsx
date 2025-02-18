@@ -9,7 +9,6 @@ export async function getBook({bookId, setBook}:{bookId: string, setBook: (e: Bo
             bookId
         );
 
-        console.log(data);
         setBook(data as unknown as Book);
     }catch(err){
         console.error(err);
